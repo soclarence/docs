@@ -83,10 +83,7 @@
         "label": "Support",
         "href": "mailto:support@foresightapi.xyz"
       }
-    ],
-    "primary": {
-      "type": "button"
-    }
+    ]
   },
   "footer": {
     "socials": {
