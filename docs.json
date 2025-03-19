@@ -84,11 +84,6 @@
         "href": "mailto:hi@mintlify.com"
       }
     ],
-    "primary": {
-      
-      "label": "Dashboard",
-      "href": "https://foresightapi.xyz/login"
-    }
   },
   "footer": {
     "socials": {
