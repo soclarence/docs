@@ -1,0 +1,90 @@
+---
+title: "Custom Tags"
+description: "This is a free tool we created to help you create custom tags to monitor activities on your frontend and your backend.
+
+With this tool, you can use it as a way to take reports on how many times a button was clicked on your website or how many times an API endpoint was called, it all depends on you."
+---
+
+### How it works
+
+You create a custom tag with the foresight-SDK using the tracker package. you get a report daily at 5 pm UTC and another report every week with the cumulative activity of all that happened that week regarding your tags, and finally one report at the end of the month.
+
+## Installation
+
+Install the package using npm:
+
+```bash
+npm install foresight-sdk
+```
+
+Or using yarn:
+
+```bash
+yarn add foresight-sdk
+```
+
+## Usage
+
+### TypeScript
+
+```typescript
+import tracker from 'foresight-sdk';
+
+// Track an event
+try {
+  await tracker({
+    tag: 'event_name',
+    apiKey: 'your_api_key',
+    userId: 'user_123'
+  });
+  console.log('Event tracked successfully');
+} catch (error) {
+  console.error('Failed to track event:', error);
+}
+```
+
+### JavaScript
+
+```javascript
+const tracker = require('foresight-sdk').default;
+
+// Track an event
+try {
+  await tracker({
+    tag: 'event_name',
+    apiKey: 'your_api_key',
+    userId: 'user_123'
+  });
+  console.log('Event tracked successfully');
+} catch (error) {
+  console.error('Failed to track event:', error);
+}
+```
+
+## Reference
+
+### tracker(params)
+
+Sends a tracking event to the Foresight platform.
+
+#### Parameters
+
+`params` - Object with the following properties:
+
+- `tag` (string, required): The name or identifier of the event you want to track
+- `apiKey` (string, required): Your Foresight API key
+- `userId` (string, required): The identifier of the user performing the action
+
+#### Returns
+
+Returns a Promise that resolves when the event is successfully tracked, or rejects with an error if the tracking fails.
+
+## Error Handling
+
+The SDK includes built-in error handling and will throw an error if:
+
+- The request to the Foresight API fails
+- Required parameters are missing or invalid
+- Network connectivity issues occur
+
+It's recommended to wrap the tracker calls in try-catch blocks to handle potential errors gracefully.

@@ -24,9 +24,10 @@
           {
             "group": "Features",
             "pages": [
-              "kima",
-              "tags",
-              "ping"
+              "features/ping",
+              "features/kima",
+              "features/tags"
+              
             ]
           }
         ]
