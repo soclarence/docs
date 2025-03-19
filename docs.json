@@ -3,9 +3,9 @@
   "theme": "mint",
   "name": "Foresight API",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#18212D",
+    "light": "#18212D",
+    "dark": "#18212D"
   },
   "favicon": "/favicon.svg",
   "navigation": {
