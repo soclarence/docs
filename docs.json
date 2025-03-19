@@ -87,7 +87,8 @@
     "primary": {
       "type": "button",
       "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
+      "href": "https://foresightapi.xyz/login",
+      "color": "#18212D"
     }
   },
   "footer": {
