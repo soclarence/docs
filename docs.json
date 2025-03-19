@@ -4,7 +4,7 @@
   "name": "Foresight API",
   "colors": {
     "primary": "#18212D",
-    "light": "#18212D",
+    "light": "#eaeaea",
     "dark": "#eaeaea"
   },
   "favicon": "/favicon.svg",
