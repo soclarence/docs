@@ -20,6 +20,14 @@
               "quickstart",
               "development"
             ]
+          },
+          {
+            "group": "Features",
+            "pages": [
+              "kima",
+              "tags",
+              "ping"
+            ]
           }
         ]
       },
