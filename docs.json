@@ -61,14 +61,9 @@
           "icon": "book-open-cover"
         },
         {
-          "anchor": "Community",
-          "href": "https://mintlify.com/community",
-          "icon": "slack"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
+          "anchor": "Release notes",
+          "href": "https://foresightapi.xyz/release-notes",
+          "icon": "note"
         }
       ]
     }
