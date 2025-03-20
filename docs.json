@@ -35,9 +35,9 @@
     "global": {
       "anchors": [
         {
-          "anchor": "Dashboaard",
+          "anchor": "Dashboard",
           "href": "https://foresightapi.xyz/dashboard",
-          "icon": "dashboard"
+          "icon": "forth"
         },
         {
           "anchor": "Release notes",
