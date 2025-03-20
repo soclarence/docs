@@ -16,9 +16,9 @@ When your application encounters an error and logs it through the Foresight API,
 
 Below is a sample request to submit an error log to Kima:
 
-<CodeGroup>
+<RequestExample>
 
-```javascript Test
+```javascript javascript
 import axios from 'axios';
 
 const submitErrorLog = async (message, error_stack) => {
@@ -38,6 +38,36 @@ const submitErrorLog = async (message, error_stack) => {
     console.error('Error submitting log');
   }
 };
+```
+
+</RequestExample>
+
+<CodeGroup>
+
+```javascript javascript
+import axios from 'axios';
+
+const submitErrorLog = async (message, error_stack) => {
+  try {
+    const response = await axios.post('/service/logs', {
+      api_key: 'your_api_key', //replace with api key
+      server_id: 'server_123', //replace with server id
+      level: 'error',
+      message: message, //get error message from server api call
+      stack: error_stack, //get error stack from server api call
+      tag: 'user-service', //tag your request
+      user_id: 'user_456' //your user id
+    });
+
+    console.log('Log processed successfully');
+  } catch (error) {
+    console.error('Error submitting log');
+  }
+};
+```
+
+
+``` python
 ```
 
 </CodeGroup>
