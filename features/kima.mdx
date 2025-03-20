@@ -18,7 +18,7 @@ Below is a sample request to submit an error log to Kima:
 
 <RequestExample>
 
-```javascript javascript
+```javascript
 import axios from 'axios';
 
 const submitErrorLog = async (message, error_stack) => {
@@ -38,53 +38,42 @@ const submitErrorLog = async (message, error_stack) => {
     console.error('Error submitting log');
   }
 };
+```
+
+
+```python File 2
+import requests
+
+def submit_error_log(message, error_stack):
+    try:
+        response = requests.post(
+            "https://foresightapi.xyz/service/logs",
+            json={
+                "api_key": "your_api_key",  # Replace with your actual API key
+                "server_id": "server_123",  # Replace with your server ID
+                "level": "error",
+                "message": message,  # Get the error message from your server API call
+                "stack": error_stack,  # Get the error stack from your server API call
+                "tag": "user-service",  # Tag your request
+                "user_id": "user_456"  # Your user ID
+            }
+        )
+
+        if response.status_code == 200:
+            print("Log processed successfully")
+        else:
+            print("Failed to process log:", response.json())
+
+    except Exception as e:
+        print("Error submitting log:", str(e))
+
+# Example usage
+submit_error_log(
+    "TypeError: 'NoneType' object is not callable",
+    "File 'app.py', line 42, in <module>"
+)
 ```
 
 </RequestExample>
-
-<CodeGroup>
-
-```javascript javascript
-import axios from 'axios';
-
-const submitErrorLog = async (message, error_stack) => {
-  try {
-    const response = await axios.post('/service/logs', {
-      api_key: 'your_api_key', //replace with api key
-      server_id: 'server_123', //replace with server id
-      level: 'error',
-      message: message, //get error message from server api call
-      stack: error_stack, //get error stack from server api call
-      tag: 'user-service', //tag your request
-      user_id: 'user_456' //your user id
-    });
-
-    console.log('Log processed successfully');
-  } catch (error) {
-    console.error('Error submitting log');
-  }
-};
-```
-
-
-``` python
-```
-
-</CodeGroup>
-
-## Example Response
-
-## Notifications
-
-- **Email Alerts:** Sent to users on any subscription plan.
-- **WhatsApp Alerts:** Available to users on higher-tier plans (excluding Basic and Free).
-
-## Limitations
-
-- The AI-powered error analysis is available only on paid plans.
-
-## Conclusion
-
-Kima simplifies server error debugging for non-technical users while offering practical solutions to developers. Whether you're a solo founder or part of a growing team, Kima helps streamline error resolution, reducing downtime and confusion.
 
 For more information, visit the [Foresight API Dashboard](https://foresightapi.xyz/dashboard/logs).
