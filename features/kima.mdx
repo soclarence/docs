@@ -1,5 +1,60 @@
 ---
-title: 'AI Debugger — Kima'
-description: 'Description of your new file.'
+title: "AI Debugger — Kima"
+description: "Kima is an AI-powered debugger integrated into the Foresight API platform. It leverages OpenAI's GPT-3.5 to analyze server logs, providing clear, readable explanations and possible solutions for detected errors. The primary goal is to make error handling accessible to non-technical founders, vibe coders, and developers seeking quick and understandable solutions."
 ---
 
+## How It Works
+
+When your application encounters an error and logs it through the Foresight API, Kima processes the log entry and interacts with OpenAI to generate a solution. Here's a breakdown of the process:
+
+1. **Log Submission**: Your server submits a log to Foresight API containing essential details like the server ID, error level, message, and stack trace.
+2. **GPT Analysis**: Kima sends a prompt to OpenAI to analyze the error and provide a readable explanation and possible fix.
+3. **Log Storage**: The processed log, including the GPT solution, is saved for future reference.
+4. **Notifications**: If applicable, users receive an email and a WhatsApp message with a summary of the error and a link to the dashboard.
+
+## Example Log Request (JavaScript)
+
+Below is a sample request to submit an error log to Kima:
+
+<CodeGroup>
+
+```javascript Test
+import axios from 'axios';
+
+const submitErrorLog = async (message, error_stack) => {
+  try {
+    const response = await axios.post('/service/logs', {
+      api_key: 'your_api_key', //replace with api key
+      server_id: 'server_123', //replace with server id
+      level: 'error',
+      message: message, //get error message from server api call
+      stack: error_stack, //get error stack from server api call
+      tag: 'user-service', //tag your request
+      user_id: 'user_456' //your user id
+    });
+
+    console.log('Log processed successfully');
+  } catch (error) {
+    console.error('Error submitting log');
+  }
+};
+```
+
+</CodeGroup>
+
+## Example Response
+
+## Notifications
+
+- **Email Alerts:** Sent to users on any subscription plan.
+- **WhatsApp Alerts:** Available to users on higher-tier plans (excluding Basic and Free).
+
+## Limitations
+
+- The AI-powered error analysis is available only on paid plans.
+
+## Conclusion
+
+Kima simplifies server error debugging for non-technical users while offering practical solutions to developers. Whether you're a solo founder or part of a growing team, Kima helps streamline error resolution, reducing downtime and confusion.
+
+For more information, visit the [Foresight API Dashboard](https://foresightapi.xyz/dashboard/logs).
