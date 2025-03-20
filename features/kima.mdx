@@ -3,7 +3,7 @@ title: "AI Debugger — Kima"
 description: "Kima is an AI-powered debugger integrated into the Foresight API platform. It leverages OpenAI's GPT-3.5 to analyze server logs, providing clear, readable explanations and possible solutions for detected errors. The primary goal is to make error handling accessible to non-technical founders, vibe coders, and developers seeking quick and understandable solutions."
 ---
 
-## How It Works
+### How It Works
 
 When your application encounters an error and logs it through the Foresight API, Kima processes the log entry and interacts with OpenAI to generate a solution. Here's a breakdown of the process:
 
@@ -12,13 +12,13 @@ When your application encounters an error and logs it through the Foresight API,
 3. **Log Storage**: The processed log, including the GPT solution, is saved for future reference.
 4. **Notifications**: If applicable, users receive an email and a WhatsApp message with a summary of the error and a link to the dashboard.
 
-## Example Log Request (JavaScript)
+### Example Log Request (JavaScript)
 
 Below is a sample request to submit an error log to Kima:
 
-<RequestExample>
+<CodeGroup>
 
-```javascript
+```javascript javascript [expandable]
 import axios from 'axios';
 
 const submitErrorLog = async (message, error_stack) => {
@@ -41,7 +41,7 @@ const submitErrorLog = async (message, error_stack) => {
 ```
 
 
-```python File 2
+```python python [expandable]
 import requests
 
 def submit_error_log(message, error_stack):
@@ -66,14 +66,150 @@ def submit_error_log(message, error_stack):
 
     except Exception as e:
         print("Error submitting log:", str(e))
-
-# Example usage
-submit_error_log(
-    "TypeError: 'NoneType' object is not callable",
-    "File 'app.py', line 42, in <module>"
-)
 ```
 
-</RequestExample>
+
+```typescript typescript [expandable]
+import axios from "axios";
+
+const submitErrorLog = async (message: string, errorStack: string): Promise<void> => {
+  try {
+    const response = await axios.post("https://foresightapi.xyz/service/logs", {
+      api_key: "your_api_key", // Replace with your actual API key
+      server_id: "server_123", // Replace with your server ID
+      level: "error",
+      message, // Get the error message from your server API call
+      stack: errorStack, // Get the error stack from your server API call
+      tag: "user-service", // Tag your request
+      user_id: "user_456", // Your user ID
+    });
+
+    console.log("Log processed successfully");
+  } catch (error) {
+    console.error("Error submitting log:", (error as Error).message);
+  }
+};
+```
+
+
+```go golang [expandable]
+package main
+
+import (
+	"bytes"
+	"encoding/json"
+	"fmt"
+	"net/http"
+)
+
+func submitErrorLog(message, errorStack string) {
+	data := map[string]string{
+		"api_key":   "your_api_key",   // Replace with your actual API key
+		"server_id": "server_123",     // Replace with your server ID
+		"level":     "error",
+		"message":   message,          // Get the error message from your server API call
+		"stack":     errorStack,       // Get the error stack from your server API call
+		"tag":       "user-service",   // Tag your request
+		"user_id":   "user_456",       // Your user ID
+	}
+
+	jsonData, err := json.Marshal(data)
+	if err != nil {
+		fmt.Println("Error marshaling data:", err)
+		return
+	}
+
+	resp, err := http.Post("https://foresightapi.xyz/service/logs", "application/json", bytes.NewBuffer(jsonData))
+	if err != nil {
+		fmt.Println("Error submitting log:", err)
+		return
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode == http.StatusOK {
+		fmt.Println("Log processed successfully")
+	} else {
+		fmt.Println("Failed to process log, status code:", resp.StatusCode)
+	}
+}
+```
+
+
+```kotlin kotlin [expandable]
+import io.ktor.client.*
+import io.ktor.client.request.*
+import io.ktor.client.statement.*
+import io.ktor.client.engine.cio.*
+import io.ktor.client.plugins.contentnegotiation.*
+import io.ktor.serialization.kotlinx.json.*
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.Json
+import kotlinx.coroutines.runBlocking
+
+@Serializable
+data class ErrorLog(
+    val api_key: String,
+    val server_id: String,
+    val level: String,
+    val message: String,
+    val stack: String?,
+    val tag: String,
+    val user_id: String
+)
+
+fun submitErrorLog(message: String, errorStack: String?) {
+    val client = HttpClient(CIO) {
+        install(ContentNegotiation) {
+            json(Json { ignoreUnknownKeys = true })
+        }
+    }
+
+    runBlocking {
+        try {
+            val log = ErrorLog(
+                api_key = "your_api_key",      // Replace with your actual API key
+                server_id = "server_123",      // Replace with your server ID
+                level = "error",
+                message = message,             // Get the error message from your server API call
+                stack = errorStack,            // Get the error stack from your server API call
+                tag = "user-service",          // Tag your request
+                user_id = "user_456"           // Your user ID
+            )
+
+            val response: HttpResponse = client.post("https://foresightapi.xyz/service/logs") {
+                setBody(log)
+            }
+
+            if (response.status.value == 200) {
+                println("Log processed successfully")
+            } else {
+                println("Failed to process log, status code: ${response.status.value}")
+            }
+
+        } catch (e: Exception) {
+            println("Error submitting log: ${e.message}")
+        } finally {
+            client.close()
+        }
+    }
+}
+```
+
+</CodeGroup>
+
+### Notifications
+
+- **Email Alerts:** Sent to users on any subscription plan.
+- **WhatsApp Alerts:** Available to users on higher-tier plans (excluding Basic and Free).
+
+### Limitations
+
+- Kima is currently in a beta phase, an SDK will be provided soon.
+- The AI-powered error analysis is available only on paid plans.
+- Site analytics and tag monitoring features are under consideration for future updates.
+
+## Conclusion
+
+Kima simplifies server error debugging for non-technical users while offering practical solutions to developers. Whether you're a solo founder or part of a growing team, Kima helps streamline error resolution, reducing downtime and confusion.
 
 For more information, visit the [Foresight API Dashboard](https://foresightapi.xyz/dashboard/logs).
